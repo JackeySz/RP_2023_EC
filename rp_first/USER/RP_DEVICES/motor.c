@@ -123,8 +123,9 @@ void RM_MotorInit(void)
 	{
 		motor[i].init(&motor[i]);
 	}
+	/*--------------------------------------------------------------*/
+	/*电机速度pid初始化*/
 	
-	//电机速度pid初始化
 	motor[MOTOR_TEST].pid_init(&motor[MOTOR_TEST].pid.speed,test_speed_pid_param);
 
 	motor[GIMB_Y].pid_init(&motor[GIMB_Y].pid.angle,   yaw_imu_out_pid_param);

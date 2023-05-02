@@ -51,7 +51,7 @@ void master_updata(struct master_struct *self,uint8_t *buff,uint32_t canId)
 	
 		memcpy(&self->data.imu_q,buff,sizeof(self->data.imu_q));
 	
-		master->info.offline_cnt = 0;
+		self->info.offline_cnt = 0;
 	}
 	
 #endif
@@ -85,8 +85,11 @@ void MASTER_sendBuff(void)
 
 void MASTER_HeartBeat(void)
 {
-	master[M0].heart_beat(&master[M0]);
-	master[M1].heart_beat(&master[M1]);
+	for(int16_t i = 0;i<MASTER_LIST;i++){
+	
+	  master[i].heart_beat(&master[i]);
+	}
+
 }
 
 

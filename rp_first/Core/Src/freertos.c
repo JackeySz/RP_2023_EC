@@ -48,7 +48,7 @@
 
 /* USER CODE END Variables */
 osThreadId MonitorTaskHandle;
-osThreadId ImuGetDataTaskHandle;
+osThreadId CommunityTaskHandle;
 osThreadId ControlTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -57,7 +57,7 @@ osThreadId ControlTaskHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartMonitorTask(void const * argument);
-void StartImuTask(void const * argument);
+void StartCommunityTask(void const * argument);
 void StartControlTask(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -106,15 +106,15 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of MonitorTask */
-  osThreadDef(MonitorTask, StartMonitorTask, osPriorityHigh, 0, 128);
+  osThreadDef(MonitorTask, StartMonitorTask, osPriorityRealtime, 0, 256);
   MonitorTaskHandle = osThreadCreate(osThread(MonitorTask), NULL);
 
-  /* definition and creation of ImuGetDataTask */
-  osThreadDef(ImuGetDataTask, StartImuTask, osPriorityRealtime, 0, 128);
-  ImuGetDataTaskHandle = osThreadCreate(osThread(ImuGetDataTask), NULL);
+  /* definition and creation of CommunityTask */
+  osThreadDef(CommunityTask, StartCommunityTask, osPriorityHigh, 0, 512);
+  CommunityTaskHandle = osThreadCreate(osThread(CommunityTask), NULL);
 
   /* definition and creation of ControlTask */
-  osThreadDef(ControlTask, StartControlTask, osPriorityNormal, 0, 128);
+  osThreadDef(ControlTask, StartControlTask, osPriorityNormal, 0, 256);
   ControlTaskHandle = osThreadCreate(osThread(ControlTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
@@ -141,22 +141,22 @@ __weak void StartMonitorTask(void const * argument)
   /* USER CODE END StartMonitorTask */
 }
 
-/* USER CODE BEGIN Header_StartImuTask */
+/* USER CODE BEGIN Header_StartCommunityTask */
 /**
-* @brief Function implementing the ImuGetDataTask thread.
+* @brief Function implementing the CommunityTask thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_StartImuTask */
-__weak void StartImuTask(void const * argument)
+/* USER CODE END Header_StartCommunityTask */
+__weak void StartCommunityTask(void const * argument)
 {
-  /* USER CODE BEGIN StartImuTask */
+  /* USER CODE BEGIN StartCommunityTask */
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
   }
-  /* USER CODE END StartImuTask */
+  /* USER CODE END StartCommunityTask */
 }
 
 /* USER CODE BEGIN Header_StartControlTask */

@@ -155,6 +155,7 @@ void rc_updata(rc_t *self , uint8_t *rxBuf)
 	
 
 	if(RC_ResetJudge(self))self->info.rc_wake = 1;
+	
 	if(!self->info.rc_wake){
 		
 		self->data.ch0 = 0; 
@@ -191,7 +192,9 @@ static void rc_heart_beat(rc_t *self)
 		if(info->state == RC_OFFLINE)
 		{
 			info->state = RC_ONLINE;
+			self->info.rc_wake = 0;
 			RC_ResetData(self);  //重新连接后复位所有遥控数据
+			
 		}
 	}
 }	

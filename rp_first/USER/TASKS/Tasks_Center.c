@@ -40,6 +40,12 @@ void StartMonitorTask(void const * argument)
 		
 		MASTER_HeartBeat();
 		
+#if RC_KEY_MONITOR == 1		
+		
+		rc.key(&rc);
+		
+#endif		
+
     osDelay(1);
   }
   /* USER CODE END 5 */
@@ -47,14 +53,16 @@ void StartMonitorTask(void const * argument)
 
 
 
-void StartImuTask(void const * argument)
+void StartCommunityTask(void const * argument)
 {
   /* USER CODE BEGIN StartImuTask */
   /* Infinite loop */
   for(;;)
   {
 		imu.updata(&imu);
-
+		
+		MASTER_sendBuff();
+		
 #if MASTER == 0U
 
 		/*等待imu数据收敛切换更低的kp用于控制使用*/
@@ -91,7 +99,7 @@ void StartControlTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-		MASTER_sendBuff();
+
 		
 #if (RM_MOTOR_TEST == 1U)		
 		RM_MotorControl_Test();

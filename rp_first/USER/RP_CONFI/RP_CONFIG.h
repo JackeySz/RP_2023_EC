@@ -22,6 +22,8 @@ https://gitee.com/HaveALitttleSao/RP2021_HAL_Template/tree/master/
 
 DSP使用添加文件路径的方法，需要什么添加什么不要全部加进去，也不要勾选keil的DSP配置
 
+使用cube后，需要用user中的cmsis文件替换drives中的cmsis
+
 --------------------------------------
 
 #define MASTER 1U
@@ -112,6 +114,7 @@ power为主控电源位置，按下图摆放找坐标系
 #define RM_MOTOR_TYPE_TEST       1U //1 6020 2 3508 3 2006
 
 
+#define RC_KEY_MONITOR       1U 
 
 
 

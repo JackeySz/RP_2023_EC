@@ -32,7 +32,10 @@
   @ingroup groupMatrix
  */
 
-
+/**
+  @defgroup MatrixInit Matrix Initialization
+ 
+ */
 
 /**
   @addtogroup MatrixInit
